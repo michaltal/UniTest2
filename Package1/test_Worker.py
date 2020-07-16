@@ -16,7 +16,8 @@ class TestWorker(TestCase):
     def test_full_name(self):
         bob = Worker('Bob', 'Marshall', 1970, 7, 5)
         self.assertTrue(bob.full_name() == 'Bob Marshall')
-        print('hi hi hi')
+        print('Hello')
+        print("Bye")
 
     def test_age(self):
         #datetime = Mock()
