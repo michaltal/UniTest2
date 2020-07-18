@@ -17,20 +17,23 @@ class TestWorker(TestCase):
 
     def test_full_name(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 5)
-        print(self.bob.full_name())
+        # print(self.bob.full_name())
         self.assertTrue(self.bob.full_name() == 'Bob Marshall')
         self.assertTrue(self.alice.full_name() == 'Alice Smith')
 
     def test_age(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 5)
-        print(self.bob.age())
+        # print(self.bob.age())
         # print(datetime.datetime.now().year())
         self.assertTrue(self.bob.age() == "Bob is 50 years old")
+        self.assertTrue(self.alice.age() == "Alice is 25 years old")
 
     def test_days_to_birthday(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30)
-        print(self.bob.days_to_birthday())
+        # print(self.bob.days_to_birthday())
+        # print(self.alice.days_to_birthday())
         self.assertIn("12", self.bob.days_to_birthday())
+        self.assertIn("136", self.alice.days_to_birthday())
 
     def test_location(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30, '2 Dizengof, Tel Aviv', 'il')
