@@ -1,32 +1,50 @@
 from unittest import TestCase
 from unittest.mock import Mock
+from unittest.mock import MagicMock
 from unittest.mock import patch
 from Package1.Worker import Worker
 
-mock = Mock()
-# Mock -  You can do this by passing it as an argument to a function or by redefining another object
-# function_name(mock)
-# The return value of mock is also a Mock.
 
 class TestWorker(TestCase):
 
+    def setUp(self):
+        print('setup')
+        self.bob = Worker('Bob', 'Marshall', 1970, 7, 30, '2 Dizengof, Tel Aviv', 'il')
+        self.alice = Worker('Alice', 'Smith', 1995, 12, 1, '90 Yigal Alon, Tel Aviv', 'il')
 
-    # @mock.patch('datetime.datetime.now().year', return_value=2019)
+    def tearDown(self):
+        print('TearDown')
 
     def test_full_name(self):
-        bob = Worker('Bob', 'Marshall', 1970, 7, 5)
-        self.assertTrue(bob.full_name() == 'Bob Marshall')
-        print('Hello')
-        print("Bye")
+        # bob = Worker('Bob', 'Marshall', 1970, 7, 5)
+        print(self.bob.full_name())
+        self.assertTrue(self.bob.full_name() == 'Bob Marshall')
+        self.assertTrue(self.alice.full_name() == 'Alice Smith')
 
     def test_age(self):
-        #datetime = Mock()
-        #with mock.patch('datetime.datetime.now().year',return_value = 2019)
-          bob = Worker('Bob', 'Marshall', 1970, 7, 5)
-          print(bob.age())
-          print(datetime.datetime.now().year())
-          self.assertTrue(bob.age() == 49)
+        # bob = Worker('Bob', 'Marshall', 1970, 7, 5)
+        print(self.bob.age())
+        # print(datetime.datetime.now().year())
+        self.assertTrue(self.bob.age() == "Bob is 50 years old")
 
     def test_days_to_birthday(self):
-        bob = Worker('Bob', 'Marshall', 1970, 7, 5)
-        self.assertTrue(bob.days_to_birthday() == 4)
+        # bob = Worker('Bob', 'Marshall', 1970, 7, 30)
+        print(self.bob.days_to_birthday())
+        self.assertIn("12", self.bob.days_to_birthday())
+
+    def test_location(self):
+        # bob = Worker('Bob', 'Marshall', 1970, 7, 30, '2 Dizengof, Tel Aviv', 'il')
+        # print(bob.location())
+        with patch('Worker.requests.get') as mocked_get:
+            mocked_get.return_value.ok = True
+            mocked_get.return_value.text = 'Success'
+
+            res = self.bob.location()
+            mocked_get.assert_called_with('https://geocode.xyz/?locate=2 Dizengof, Tel Aviv,il &json=1')
+            self.assertEqual(res, 'Success')
+
+            mocked_get.return_value.ok = False
+
+            res = self.bob.location()
+            mocked_get.assert_called_with('https://geocode.xyz/?locate=2 Dizengof, Tel Aviv,il &json=1')
+            self.assertEqual(res, 'Bad response!')
