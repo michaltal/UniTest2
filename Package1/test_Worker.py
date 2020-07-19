@@ -30,8 +30,8 @@ class TestWorker(TestCase):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30)
         # print(self.bob.days_to_birthday())
         # print(self.alice.days_to_birthday())
-        self.assertIn("12", self.bob.days_to_birthday())
-        self.assertIn("136", self.alice.days_to_birthday())
+        self.assertIn("11", self.bob.days_to_birthday())
+        self.assertIn("135", self.alice.days_to_birthday())
 
     def test_location(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30, '2 Dizengof, Tel Aviv', 'il')

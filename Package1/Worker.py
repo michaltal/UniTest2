@@ -2,9 +2,11 @@
 import datetime
 import requests
 
+
 class Worker:
     """The Worker class holds information and methods about workers"""
-    def __init__(self, fname, lname, byear, bmonth, bday,adr, country):
+
+    def __init__(self, fname, lname, byear, bmonth, bday, adr, country):
         self.first_name = fname
         self.last_name = lname
         self.birth_year = byear
@@ -25,7 +27,7 @@ class Worker:
         """Returns the number of days until the next birthday"""
         now = datetime.date.today()
         if self.birth_month < int(now.month):
-            new_year = int(now.year)+1
+            new_year = int(now.year) + 1
             birthday_this_year = datetime.date(new_year, self.birth_month, self.birth_day)
         else:
             birthday_this_year = datetime.date(int(now.year), self.birth_month, self.birth_day)
@@ -39,12 +41,12 @@ class Worker:
         param = self.address + ',' + self.cntry
         url = f'https://geocode.xyz/?locate={param} &json=1'
 
-        payload = {}
-        headers = {
-          'Cookie': '__cfduid=db7a3a4e2ae670bba0d182afaf4d2cc2f1592807975; xyzh=xyzh'
-        }
+        #payload = {}
+        #headers = {
+         #   'Cookie': '__cfduid=db7a3a4e2ae670bba0d182afaf4d2cc2f1592807975; xyzh=xyzh'
+        #}
 
-        #response = requests.request("GET", url, headers=headers, data = payload)
+        # response = requests.request("GET", url, headers=headers, data = payload)
         response = requests.get(url)
 
         if response.ok:
