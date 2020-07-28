@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 from Package1.Worker import Worker
+from freezegun import freeze_time
 
 
 class TestWorker(TestCase):
@@ -13,8 +14,9 @@ class TestWorker(TestCase):
     def tearDown(self):
         print('TearDown')
 
-    def test_full_name(self):
-        # bob = Worker('Bob', 'Marshall', 1970, 7, 5)
+    def test_full_name1(self):
+        #bob = Worker('Bob', 'Marshall', 1970, 7, 5)
+        #alice = Worker('Alice', 'Smith', 1995, 12, 1, '90 Yigal Alon, Tel Aviv', 'il')
         # print(self.bob.full_name())
         self.assertTrue(self.bob.full_name() == 'Bob Marshall')
         self.assertTrue(self.alice.full_name() == 'Alice Smith')
@@ -30,8 +32,8 @@ class TestWorker(TestCase):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30)
         # print(self.bob.days_to_birthday())
         # print(self.alice.days_to_birthday())
-        self.assertIn("11", self.bob.days_to_birthday())
-        self.assertIn("135", self.alice.days_to_birthday())
+        self.assertIn("3", self.bob.days_to_birthday())
+        self.assertIn("127", self.alice.days_to_birthday())
 
     def test_location(self):
         # bob = Worker('Bob', 'Marshall', 1970, 7, 30, '2 Dizengof, Tel Aviv', 'il')

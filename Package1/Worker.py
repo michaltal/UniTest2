@@ -26,6 +26,7 @@ class Worker:
     def days_to_birthday(self):
         """Returns the number of days until the next birthday"""
         now = datetime.date.today()
+        #print(now)
         if self.birth_month < int(now.month):
             new_year = int(now.year) + 1
             birthday_this_year = datetime.date(new_year, self.birth_month, self.birth_day)
@@ -53,3 +54,6 @@ class Worker:
             return response.text
         else:
             return 'Bad response!'
+
+#Yoram = Worker('Yoram', 'Marshall', 1970, 7, 30, '2 Kaplan, Tel Aviv', 'il')
+#print(Yoram.location())
